@@ -1,0 +1,9 @@
+version: 0.2
+
+phases:
+  build:
+    commands:
+      - docker build -t my-test-image .
+      - docker tag my-test-image:latest my-registry/my-test-image:latest
+      - $(aws ecr get-login --no-include-email --region us-east-1)
+      - docker push my-registry/my-test-image:latest
